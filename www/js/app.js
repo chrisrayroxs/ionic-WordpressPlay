@@ -29,16 +29,75 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // Each state's controller can be found in controllers.js
   $stateProvider
 
+    // END DEFAULT TABS
+    // start WP tabs
+    .state('app', {
+      url: "/app",
+      abstract: true,
+      templateUrl: "templates/menu.html",
+      controller: 'AppCtrl'
+    })
+
+    .state('app.dashboard', {
+      url: "/dashboard",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/dashboard.html",
+          controller: "DashboardCtrl"
+        }
+      }
+    })
+
+    .state('app.search', {
+      url: "/search",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/search.html"
+        }
+      }
+    })
+
+
+    .state('app.stats', {
+      url: "/stats",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/stats.html",
+          controller: "StatsCtrl"
+        }
+      }
+    })
+
+    .state('app.pages', {
+      url: "/pages",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/pages.html",
+          controller: 'PagesCtrl'
+        }
+      }
+    })
+
+    .state('app.single', {
+      url: "/pages/:pageId",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/page.html",
+          controller: 'PageCtrl'
+        }
+      }
+    })
+
+    // DEFAULT TABS
     // setup an abstract state for the tabs directive
-    .state('tab', {
+    .state('app.tab', {
       url: "/tab",
       abstract: true,
       templateUrl: "templates/tabs.html"
     })
 
     // Each tab has its own nav history stack:
-
-    .state('tab.dash', {
+    .state('app.tab.dash', {
       url: '/dash',
       views: {
         'tab-dash': {
@@ -48,7 +107,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
-    .state('tab.friends', {
+    .state('app.tab.account', {
+      url: '/account',
+      views: {
+        'tab-account': {
+          templateUrl: 'templates/tab-account.html',
+          controller: 'AccountCtrl'
+        }
+      }
+    })
+
+    .state('app.tab.friends', {
       url: '/friends',
       views: {
         'tab-friends': {
@@ -57,7 +126,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-    .state('tab.friend-detail', {
+
+    .state('app.tab.friend-detail', {
       url: '/friend/:friendId',
       views: {
         'tab-friends': {
@@ -65,20 +135,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'FriendDetailCtrl'
         }
       }
-    })
-
-    .state('tab.account', {
-      url: '/account',
-      views: {
-        'tab-account': {
-          templateUrl: 'templates/tab-account.html',
-          controller: 'AccountCtrl'
-        }
-      }
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/app/dashboard');
 
 });
 
